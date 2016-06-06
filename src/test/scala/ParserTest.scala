@@ -3,8 +3,9 @@ package wordhoardutils
 import org.specs2.mutable._
 import scala.io.Source
 import java.io.File
+import java.net.URL
 import java.io.PrintWriter
-//import scala.xml
+
 
 
 class  ParserTest extends Specification {
@@ -24,6 +25,13 @@ class  ParserTest extends Specification {
     }
    }
 
+   "A WHParser object" should {
+     "build a list of Scholion objects from a wordhoard file" in {
+       val fileUrl = getClass.getResource("/iliad-scholia-test.xml")
+       val scholia = WHParser.parseSource(fileUrl)
+       scholia must have size(745)
+     }
+   }
 
 
 }
