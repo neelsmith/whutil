@@ -17,6 +17,9 @@ class  WriterTest extends Specification {
       val scholiaUrl = getClass.getResource("/iliad-scholia-test.xml")
       val scholia = WHParser.parseSource(scholiaUrl)
       ScholiaWriter.writeHtml(scholia, f)
+      // Test otuput file, e.g., by parsing it, and counting number
+      // of scholia?
+      
       val x = 1
       x must_== 1
      }

@@ -8,7 +8,6 @@ import scala.collection.mutable.ArrayBuffer
 
 object WHParser {
 
-
   val extractScholionContent = new RewriteRule {
     override def transform(n: scala.xml.Node) = n match {
       case e if (e \ "@type").text == "marginalia" => scala.xml.NodeSeq.Empty
@@ -39,18 +38,25 @@ object WHParser {
   }
 
 
-  def parseSource(src: URL): Array[Scholion] = {
+  def parseFile(f: File): Array[Scholion] = {
     val scholia =  ArrayBuffer[Scholion]()
 
+    val root = scala.xml.XML.loadFile(f)
+    for (s <- root \ "annotation") {
+      scholia += parseAnnotation(s)
+    }
+    scholia.toArray[Scholion]
+  }
 
+
+  def parseSource(src: URL): Array[Scholion] = {
+    val scholia =  ArrayBuffer[Scholion]()
 
     val root = scala.xml.XML.load(src)
     for (s <- root \ "annotation") {
       scholia += parseAnnotation(s)
     }
-
     scholia.toArray[Scholion]
-
   }
 
 }

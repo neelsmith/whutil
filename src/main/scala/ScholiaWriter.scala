@@ -9,7 +9,7 @@ import java.io.PrintWriter
 
 object ScholiaWriter {
 
-val topStr = """<html>
+  val topStr = """<html>
   	<head>
   	<title>Wordhoard text of scholia</title>
   	<link rel="stylesheet" href="whutil.css"/>
@@ -17,7 +17,7 @@ val topStr = """<html>
   	<body>
 """
 
-val tailStr = "</body></html>"
+  val tailStr = "</body></html>"
 
   def writeHtml(scholia: Array[Scholion], fName: String)  {
     val outWriter = new PrintWriter(fName)
@@ -26,6 +26,7 @@ val tailStr = "</body></html>"
       outWriter.println(s.toXmlStr)
     }
     outWriter.println(tailStr)
+    outWriter.close()
   }
 
 }
