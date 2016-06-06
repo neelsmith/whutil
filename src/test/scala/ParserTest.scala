@@ -26,12 +26,18 @@ class  ParserTest extends Specification {
    }
 
    "A WHParser object" should {
-     "build a list of Scholion objects from a wordhoard file" in {
+     "build a list of Scholion objects from a wordhoard file IDed by URL" in {
        val fileUrl = getClass.getResource("/iliad-scholia-test.xml")
        val scholia = WHParser.parseSource(fileUrl)
        scholia must have size(745)
      }
    }
 
-
+    "A WHParser object" should {
+      "build a list of Scholion objects from a wordhoard file as a File object" in {
+          val f = new File("src/test/resources/iliad-scholia-test.xml")
+          val scholia = WHParser.parseFile(f)
+          scholia must have size(745)
+        }
+      }
 }
